@@ -8,7 +8,7 @@ import {
   FiLogOut,
   FiPlusCircle
 } from "react-icons/fi";
-
+import { RxDashboard } from "react-icons/rx";
 const DirectorHeader = ({ logout }) => {
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const DirectorHeader = ({ logout }) => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
             <Link
-                to="/"
+                to="/director"
                 className="flex items-center text-white hover:text-blue-400 transition-colors no-underline"
               >
                 
@@ -37,7 +37,7 @@ const DirectorHeader = ({ logout }) => {
                 to="/director/dashboard"
                 className="flex items-center text-white hover:text-blue-400 transition-colors no-underline"
               >
-                <FiHome className="mr-2" />
+                <RxDashboard className="mr-2" />
                 Dashboard
               </Link>
               <Link

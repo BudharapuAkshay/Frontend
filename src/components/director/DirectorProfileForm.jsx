@@ -1,9 +1,11 @@
-// src/components/Director/DirectorProfileForm.jsx
-
-import React, { useState, useContext } from "react";
+// src/components/director/RegistrationForm.jsx
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FiHome, FiUser, FiLogOut } from 'react-icons/fi';
+import { RxDashboard } from "react-icons/rx";
+import { Link } from 'react-router-dom';
 
-const DirectorProfileForm = () => {
+const RegistrationForm = () => {
   // State to hold form input values
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -45,8 +47,7 @@ const DirectorProfileForm = () => {
 
       if (response.ok) {
         alert("Director profile created successfully!");
-        navigate('/director/dashboard')
-        // Optionally reset form or handle other actions
+        navigate("/director/dashboard");
       } else {
         alert("Failed to create director profile. Please try again.");
       }
@@ -57,159 +58,138 @@ const DirectorProfileForm = () => {
   };
 
   return (
-    <div className="p-10 mb-10 bg-white rounded-xl shadow-lg max-w-lg mx-auto">
-      <h2 className="text-3xl font-semibold mb-8 text-gray-800 text-center">
-        Create Director Profile
-      </h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-5">
-          <label
-            className="block text-gray-600 text-sm font-medium mb-2"
-            htmlFor="directorName"
-          >
-            Name
-          </label>
-          <input
-            type="text"
-            id="directorName"
-            name="directorName"
-            value={formData.directorName}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-400"
-            placeholder="Enter full name"
-            required
-          />
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+
+      {/* Main Content */}
+      <div className="pt-20 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-gray-900 backdrop-blur-sm rounded-lg p-6">
+            <h2 className="text-2xl text-center font-bold text-white mb-6">
+              CREATE DIRECTOR PROFILE
+            </h2>
+
+            {/* Form Section */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+
+              {/* Director Name & Designation */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-base font-semibold text-gray-300">Director Name</label>
+                  <input
+                    type="text"
+                    name="directorName"
+                    value={formData.directorName}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-base font-semibold text-gray-300">Director Designation</label>
+                  <input
+                    type="text"
+                    name="directorDesignation"
+                    value={formData.directorDesignation}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+
+              {/* Director Email & Phone */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-base font-semibold text-gray-300">Email ID</label>
+                  <input
+                    type="email"
+                    name="directorEmailAddress"
+                    value={formData.directorEmailAddress}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-base font-semibold text-gray-300">Phone Number</label>
+                  <input
+                    type="text"
+                    name="directorPhoneNumber"
+                    value={formData.directorPhoneNumber}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+
+              {/* Director Company Name & Profile Picture */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-base font-semibold text-gray-300">Company Name</label>
+                  <input
+                    type="text"
+                    name="directorCompanyName"
+                    value={formData.directorCompanyName}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-base font-semibold text-gray-300">Profile Picture URL</label>
+                  <input
+                    type="text"
+                    name="directorProfilePictureUrl"
+                    value={formData.directorProfilePictureUrl}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+
+              {/* Director Industry Specialization */}
+              <div>
+                <label className="block text-base font-semibold text-gray-300">Industry Specialization</label>
+                <input
+                  type="text"
+                  name="directorIndustrySpecialization"
+                  value={formData.directorIndustrySpecialization}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              {/* Director Industry Experience */}
+              <div>
+                <label className="block text-base font-semibold text-gray-300">Industry Experience</label>
+                <textarea
+                  rows={3}
+                  name="directorIndustryExperience"
+                  value={formData.directorIndustryExperience}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              {/* Submit Button */}
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="bg-green-600 hover:bg-green-400 text-white px-4 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div className="mb-5">
-          <label
-            className="block text-gray-600 text-sm font-medium mb-2"
-            htmlFor="directorDesignation"
-          >
-            Designation
-          </label>
-          <input
-            type="text"
-            id="directorDesignation"
-            name="directorDesignation"
-            value={formData.directorDesignation}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-400"
-            placeholder="Director of Operations, etc."
-          />
-        </div>
-        <div className="mb-5">
-          <label
-            className="block text-gray-600 text-sm font-medium mb-2"
-            htmlFor="directorProfilePictureUrl"
-          >
-            Profile Picture URL
-          </label>
-          <input
-            type="url"
-            id="directorProfilePictureUrl"
-            name="directorProfilePictureUrl"
-            value={formData.directorProfilePictureUrl}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-400"
-            placeholder="Link to profile picture"
-          />
-        </div>
-        <div className="mb-5">
-          <label
-            className="block text-gray-600 text-sm font-medium mb-2"
-            htmlFor="directorPhoneNumber"
-          >
-            Phone Number
-          </label>
-          <input
-            type="tel"
-            id="directorPhoneNumber"
-            name="directorPhoneNumber"
-            value={formData.directorPhoneNumber}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-400"
-            placeholder="Enter phone number"
-            required
-          />
-        </div>
-        <div className="mb-5">
-          <label
-            className="block text-gray-600 text-sm font-medium mb-2"
-            htmlFor="directorEmailAddress"
-          >
-            Email Address
-          </label>
-          <input
-            type="email"
-            id="directorEmailAddress"
-            name="directorEmailAddress"
-            value={formData.directorEmailAddress}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-400"
-            placeholder="Enter email address"
-            required
-          />
-        </div>
-        <div className="mb-5">
-          <label
-            className="block text-gray-600 text-sm font-medium mb-2"
-            htmlFor="directorCompanyName"
-          >
-            Company Name
-          </label>
-          <input
-            type="text"
-            id="directorCompanyName"
-            name="directorCompanyName"
-            value={formData.directorCompanyName}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-400"
-            placeholder="Enter company name"
-          />
-        </div>
-        <div className="mb-5">
-          <label
-            className="block text-gray-600 text-sm font-medium mb-2"
-            htmlFor="directorIndustryExperience"
-          >
-            Industry Experience
-          </label>
-          <input
-            type="text"
-            id="directorIndustryExperience"
-            name="directorIndustryExperience"
-            value={formData.directorIndustryExperience}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-400"
-            placeholder="e.g., 10+ years"
-          />
-        </div>
-        <div className="mb-5">
-          <label
-            className="block text-gray-600 text-sm font-medium mb-2"
-            htmlFor="directorIndustrySpecialization"
-          >
-            Industry Specialization
-          </label>
-          <input
-            type="text"
-            id="directorIndustrySpecialization"
-            name="directorIndustrySpecialization"
-            value={formData.directorIndustrySpecialization}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-400"
-            placeholder="Specialization field"
-          />
-        </div>
-        <button
-          type="submit"
-          className="px-3 mx-36 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
-        >
-          Create Profile
-        </button>
-      </form>
+      </div>
     </div>
   );
 };
 
-export default DirectorProfileForm;
+export default RegistrationForm;
