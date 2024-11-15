@@ -14,7 +14,7 @@ export default function DirectorSignup() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await fetch('http://localhost:9999/api/auth/register/director', {
+        const response = await fetch('http://localhost:9999/api/auth/register/artist', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(form),

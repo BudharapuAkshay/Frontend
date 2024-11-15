@@ -347,7 +347,7 @@ function TalentPostForm() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       {/* Main Content */}
-      <div className="pt-20 px-4 sm:px-6 lg:px-8">
+      <div className="pt-20 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto">
           <div className="bg-gray-900 backdrop-blur-sm rounded-lg p-6">
             <h2 className="text-2xl text-center font-bold text-white mb-6 ">

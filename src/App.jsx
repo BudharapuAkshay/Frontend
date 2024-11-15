@@ -15,6 +15,9 @@ import DirectorHeader from './components/director/DirectorHeader';
 import DirectorProfileForm from './components/director/DirectorProfileForm';
 import TalentPostForm from './components/director/TalentPostForm';
 import ArtistProfileForm from './components/artist/ArtistProfileForm';
+import DirectorDashboard from './components/director/DirectorDashboard';
+import PostApplicantsPage from './components/director/PostApplicantsPage';
+import DirectorProfile from './components/director/DirectorProfile';
 
 function App() {
   const { role, logout } = useContext(RoleContext);
@@ -33,10 +36,13 @@ function App() {
             <Route path="/artist" element={<ArtistLandingPage />} />
             <Route path="/director/signup" element={<DirectorSignup />} />
             <Route path="/artist/signup" element={<ArtistSignup />} />
-            
+
             <Route path="/director/create-profile" element={<DirectorProfileForm />} />
             <Route path="/artist/create-profile" element={<ArtistProfileForm />} />
             <Route path="/director/add-talent-post" element={<TalentPostForm />} />
+            <Route path="/director/dashboard" element={<DirectorDashboard />} />
+            <Route path="/director/:postId/applicants" element={<PostApplicantsPage />} />
+            <Route path="/director/profile" element={<DirectorProfile />} />
           </Routes>
         </main> 
         <Footer />

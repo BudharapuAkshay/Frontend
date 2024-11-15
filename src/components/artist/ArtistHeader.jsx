@@ -51,7 +51,7 @@ const DirectorHeader = ({ logout }) => {
                 Dashboard
               </Link>
               <Link
-                to="/director/profile"
+                to="/artist/profile"
                 className="flex items-center text-white hover:text-blue-400 transition-colors no-underline"
               >
                 <FiUser className="mr-2" />

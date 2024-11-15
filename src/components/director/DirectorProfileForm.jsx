@@ -1,9 +1,6 @@
 // src/components/director/RegistrationForm.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiHome, FiUser, FiLogOut } from 'react-icons/fi';
-import { RxDashboard } from "react-icons/rx";
-import { Link } from 'react-router-dom';
 
 const RegistrationForm = () => {
   // State to hold form input values
@@ -46,8 +43,7 @@ const RegistrationForm = () => {
       );
 
       if (response.ok) {
-        alert("Director profile created successfully!");
-        navigate("/director/dashboard");
+        navigate("/director/profile");
       } else {
         alert("Failed to create director profile. Please try again.");
       }
