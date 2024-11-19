@@ -1,76 +1,96 @@
-// src/components/director/DirectorHeader.jsx
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import logo from '../../assets/logo.svg'
-import {
-  FiHome,
-  FiUser,
-  FiLogOut,
-} from "react-icons/fi";
-import { RxDashboard } from "react-icons/rx";
+import React from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Home, User, LogOut, Briefcase } from "lucide-react";
+import { motion } from "framer-motion";
+import logo from "../../assets/logo.svg";
 
-const DirectorHeader = ({ logout }) => {
+const ArtistHeader = ({ logout }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     // Clear session storage and reset role
     sessionStorage.clear();
-    if (logout) logout(); // Call logout function from App context if available
-    navigate('/'); // Redirect to login page
+    if (logout) logout(); // Call logout function if provided
+    navigate("/"); // Redirect to login page
   };
 
   return (
-      <div>
-      {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 bg-black/20 backdrop-blur-sm z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-4">
-            <Link
-                to="/artist"
-                className="flex items-center text-white hover:text-blue-400 transition-colors no-underline"
-              >
-                
+    <nav className="bg-gray-900 text-white border-b border-gray-800">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link to={'/artist'}>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center space-x-2"
+          >
             <img src={logo} alt="Talent Hunt Logo" className="w-8 h-8" />
-              </Link>
-              
-            </div>
-            <div className="flex items-center space-x-6">
-            <Link
-                to="/artist/all-posts"
-                className="flex items-center text-white hover:text-blue-400 transition-colors no-underline"
-              >
-                <FiHome className="mr-2" />
-                All Posts
-              </Link>
-            <Link
-                to="/artist/dashboard"
-                className="flex items-center text-white hover:text-blue-400 transition-colors no-underline"
-              >
-                <RxDashboard className="mr-2" />
-                Dashboard
-              </Link>
-              <Link
-                to="/artist/profile"
-                className="flex items-center text-white hover:text-blue-400 transition-colors no-underline"
-              >
-                <FiUser className="mr-2" />
-                Profile
-              </Link>
-              <Link
-                to="/logout"
-                className="flex items-center text-white hover:text-red-400 transition-colors no-underline"
-                onClick={handleLogout}
-              >
-                <FiLogOut className="mr-2" />
-                Sign Out
-              </Link>
-            </div>
+            <span className="text-xl font-semibold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+              Talent Hunt
+            </span>
+          </motion.div>
+          </Link>
+          {/* Navigation Links */}
+          <div className="flex items-center space-x-4">
+            <NavLink
+              to="/artist/home"
+              end
+              className={({ isActive }) =>
+                `flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium ${
+                  isActive
+                    ? "bg-gray-800 text-white"
+                    : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                }`
+              }
+            >
+              <Home size={18} />
+              <span>All Posts</span>
+            </NavLink>
+
+            <NavLink
+              to="/artist/dashboard"
+              className={({ isActive }) =>
+                `flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium ${
+                  isActive
+                    ? "bg-gray-800 text-white"
+                    : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                }`
+              }
+            >
+              <Briefcase size={18} />
+              <span>Dashboard</span>
+            </NavLink>
+
+            <NavLink
+              to="/artist/profile"
+              className={({ isActive }) =>
+                `flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium ${
+                  isActive
+                    ? "bg-gray-800 text-white"
+                    : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                }`
+              }
+            >
+              <User size={18} />
+              <span>Profile</span>
+            </NavLink>
           </div>
+
+          {/* Sign Out */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleLogout}
+            className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-white"
+          >
+            <LogOut size={18} />
+            <span>Sign Out</span>
+          </motion.button>
         </div>
-      </nav>
       </div>
+    </nav>
   );
 };
 
-export default DirectorHeader;
+export default ArtistHeader;

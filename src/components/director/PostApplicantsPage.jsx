@@ -45,7 +45,7 @@ export default function PostApplicationsPage() {
                 </button>
               
               <Link
-                to={`/${selectedPost?.talentPostId}/shortlisted`}
+                to={`/director/${selectedPost?.talentPostId}/shortlisted`}
                 className="mx-4 text-white hover:text-blue-400 transition-colors no-underline"
               >
                 View Shortlisted Applicants

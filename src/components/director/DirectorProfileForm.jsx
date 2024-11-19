@@ -1,12 +1,14 @@
 // src/components/director/RegistrationForm.jsx
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const RegistrationForm = () => {
   // State to hold form input values
   const navigate = useNavigate();
+  const location = useLocation();
+  const { directorId } = location.state;
   const [formData, setFormData] = useState({
-    directorId: sessionStorage.getItem("id"),
+    directorId: directorId,
     directorName: "",
     directorDesignation: "",
     directorProfilePictureUrl: "",
@@ -43,7 +45,7 @@ const RegistrationForm = () => {
       );
 
       if (response.ok) {
-        navigate("/director/profile");
+        navigate("/login");
       } else {
         alert("Failed to create director profile. Please try again.");
       }

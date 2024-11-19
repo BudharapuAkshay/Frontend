@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiEdit2, FiCalendar, FiMapPin, FiClock, FiSave, FiX } from 'react-icons/fi';
+import { FiEdit2, FiCalendar, FiMapPin, FiSave, FiX } from 'react-icons/fi';
 import { FaRupeeSign } from "react-icons/fa";
 
 function PostDetails({ post }) {
@@ -18,7 +18,7 @@ function PostDetails({ post }) {
   };
 
   return (
-    <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6">
+    <div className="bg-gray-700/50 rounded-lg p-4 hover:bg-gray-700/70 transition-colors">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold text-white">Post Details</h2>
         {!isEditing ? (

@@ -39,6 +39,15 @@ function TalentPostForm() {
       [name]: value,
     }));
   };
+  
+  const roleOptions = {
+    Actor: ['Lead Role', 'Supporting Role', 'Extra', 'Villain'],
+    Singer: ['Lead Singer', 'Backup Singer', 'Soloist', 'Chorus'],
+    Dancer: ['Ballet Dancer', 'Hip-Hop Dancer', 'Contemporary Dancer', 'Breakdancer'],
+    Model: ['Fashion Model', 'Commercial Model', 'Runway Model'],
+    'Voice Artist': ['Narrator', 'Character Voice', 'Voice Over', 'Audio Book Reader'],
+    Performer: ['Circus Performer', 'Street Performer', 'Variety Performer'],
+  };
 
   const handleNext = () => {
     setCurrentStep((prev) => prev + 1);
@@ -101,7 +110,7 @@ function TalentPostForm() {
                 <option value="">Select talent type</option>
                 {[
                   "Actor",
-                  "Musician",
+                  "Singer",
                   "Dancer",
                   "Model",
                   "Voice Artist",
@@ -115,18 +124,21 @@ function TalentPostForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Role Type
-              </label>
-              <input
-                type="text"
+              <label className="block text-sm font-medium text-gray-300 mb-2">Role Type</label>
+              <select
                 value={formData.talentPostRoleType}
-                onChange={(e) =>
-                  handleInputChange("talentPostRoleType", e.target.value)
-                }
+                onChange={(e) => handleInputChange('talentPostRoleType', e.target.value)}
                 className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="e.g., Lead Role, Supporting Role"
-              />
+                disabled={!formData.talentPostTalentType}
+              >
+                <option value="">Select role type</option>
+                {formData.talentPostTalentType &&
+                  roleOptions[formData.talentPostTalentType].map((role) => (
+                    <option key={role} value={role}>
+                      {role}
+                    </option>
+                  ))}
+              </select>
             </div>
 
             <div>
@@ -147,7 +159,7 @@ function TalentPostForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Start Date
+                  Project Start Date
                 </label>
                 <input
                   type="date"
@@ -161,7 +173,7 @@ function TalentPostForm() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  End Date
+                  Project End Date
                 </label>
                 <input
                   type="date"
@@ -176,7 +188,7 @@ function TalentPostForm() {
 
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
-                Submission Deadline
+                Application Deadline
               </label>
               <input
                 type="date"
@@ -259,7 +271,7 @@ function TalentPostForm() {
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
-                Gender
+               Artist Gender 
               </label>
               <select
                 value={formData.talentPostGender}
@@ -350,7 +362,7 @@ function TalentPostForm() {
       <div className="pt-20 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto">
           <div className="bg-gray-900 backdrop-blur-sm rounded-lg p-6">
-            <h2 className="text-2xl text-center font-bold text-white mb-6 ">
+            <h2 className="text-2xl text-center font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent ">
               CREATE CASTING CALL
             </h2>
 
@@ -417,7 +429,7 @@ function TalentPostForm() {
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="flex items-center px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors ml-auto"
+                    className="flex items-center  px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors ml-auto"
                   >
                     Next
                     <FiArrowRight className="ml-2" />

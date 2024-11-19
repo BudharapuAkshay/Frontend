@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function ArtistProfileForm() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { artistId } = location.state;
   const [formData, setFormData] = useState({
-    artistId: sessionStorage.getItem("id"),
+    artistId: artistId,
     artistName: '',
     artistProfilePicture: null,
     artistAbout: '',
@@ -18,13 +22,13 @@ function ArtistProfileForm() {
   });
 
   const handleChange = (e) => {
-    const { name, value, type, files } = e.target;
-    if (type === 'file') {
-      setFormData({ ...formData, [name]: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,8 +46,7 @@ function ArtistProfileForm() {
       );
 
       if (response.ok) {
-        alert("Artist profile created successfully!");
-        navigate("/artist/dashboard");
+        navigate("/login");
       } else {
         alert("Failed to create artist profile. Please try again.");
       }
@@ -183,7 +186,7 @@ function ArtistProfileForm() {
             >
               <option>SELECT</option>
               <option value="Actor">Actor</option>
-              <option value="Musician">Musician</option>
+              <option value="Singer">Singer</option>
               <option value="Dancer">Dancer</option>
               <option value="Model">Model</option>
               <option value="Voice Artist">Voice Artist</option>
