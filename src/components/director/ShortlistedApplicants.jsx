@@ -50,7 +50,6 @@ const ShortlistedApplicants = () => {
       );
 
       // Optionally, you can show a success message or notification
-      console.log("Applicant removed from shortlist");
     } catch (err) {
       setError(err.message);
     }
@@ -69,7 +68,6 @@ const ShortlistedApplicants = () => {
         throw new Error("Failed to send email notifications");
       }
       // Optionally, handle response here
-      console.log("Email notifications sent to shortlisted applicants");
     } catch (err) {
       setError(err.message);
     }

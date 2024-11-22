@@ -8,7 +8,6 @@ function PostDetails({ post }) {
 
   const handleSave = () => {
     // Save logic goes here (e.g., API call to save `editedPost`)
-    console.log("Saved post:", editedPost);
     setIsEditing(false);
   };
 

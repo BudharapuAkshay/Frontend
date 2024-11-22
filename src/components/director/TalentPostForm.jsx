@@ -59,10 +59,8 @@ function TalentPostForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(currentStep);
     const directorId = sessionStorage.getItem("id"); // Fetch director ID from sessionStorage
     if (!directorId) {
-      console.error("Director ID not found in session storage");
       return;
     }
 
@@ -83,7 +81,6 @@ function TalentPostForm() {
       }
 
       const data = await response.json();
-      console.log("Post created successfully:", data);
       // Reset form or navigate to another page if needed
       navigate('/director/dashboard')
     } catch (error) {

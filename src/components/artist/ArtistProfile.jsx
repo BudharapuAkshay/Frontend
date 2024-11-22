@@ -21,7 +21,6 @@ function ArtistProfile() {
         }
         const data = await response.json();
         setArtist(data);
-        console.log(data);
       } catch (err) {
         setError(err.message);
       } finally {

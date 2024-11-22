@@ -1,7 +1,12 @@
 import React from 'react';
 import { FiCalendar, FiMapPin } from 'react-icons/fi';
 import { FaRupeeSign } from "react-icons/fa";
+
 function TalentCard({ post, onApply }) {
+  // Get the current date
+  const currentDate = new Date();
+  const deadlineDate = new Date(post.talentPostSubmissionDeadline);
+
   return (
     <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-[1.02]">
       <div className="relative">
@@ -27,7 +32,7 @@ function TalentCard({ post, onApply }) {
           </div>
           <div className="flex items-center text-gray-300">
             <FiCalendar className="mr-2" />
-            <span>{post.talentPostSubmissionDeadline.substring(0,10)}</span>
+            <span>{post.talentPostSubmissionDeadline.substring(0, 10)}</span>
           </div>
           <div className="flex items-center text-gray-300">
             <FaRupeeSign className="mr-2" />
@@ -36,12 +41,18 @@ function TalentCard({ post, onApply }) {
         </div>
 
         <div className="flex items-center justify-between">
-          <button
-            onClick={() => onApply(post.talentPostId)}
-            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-          >
-            Apply Now
-          </button>
+          {currentDate <= deadlineDate ? (
+            <button
+              onClick={() => onApply(post.talentPostId)}
+              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+            >
+              Apply Now
+            </button>
+          ) : (
+            <span className="w-full text-center bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg">
+              Applications Closed
+            </span>
+          )}
         </div>
       </div>
     </div>

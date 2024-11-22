@@ -38,7 +38,6 @@ function ArtistDashboard() {
 
     fetchAppliedPosts();
   }, [artistId]);
-  console.log(appliedPosts)
 
   const getStatusColor = (isShortlisted) => {
     return isShortlisted ? "text-green-400" : "text-yellow-400";

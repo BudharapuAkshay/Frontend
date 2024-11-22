@@ -24,8 +24,7 @@ export default function DirectorSignup() {
             });
             const data = await response.json();
             if (response.ok) {
-                navigate('/director/dashboard', { state: { directorId: data.id } });
-                console.log("Director registered successfully");
+                navigate('/director/create-profile', { state: { directorId: data.id } });
             } else {
                 console.log("Failed to register director");
             }

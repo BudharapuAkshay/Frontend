@@ -52,12 +52,11 @@ function ArtistProfileForm() {
       }
     } catch (error) {
       console.error("Error creating artist profile:", error);
-      alert("An error occurred while creating the profile.");
     }
   };
 
   return (
-    <div className="pt-20 px-4 pb-20 sm:px-6 lg:px-8">
+    <div className="pt-20 px-4 pb-20 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
   <div className="max-w-2xl mx-auto">
     <div className="bg-gray-900 backdrop-blur-sm rounded-lg p-6">
       <h2 className="text-2xl text-center font-bold text-white mb-6">

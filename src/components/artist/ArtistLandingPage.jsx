@@ -17,7 +17,7 @@ function ArtistLandingPage() {
 
   return (
     <>
-      <section id="home" className="bg-gray-900 text-white">
+      <section className="bg-gray-900 text-white">
         <div className="container mx-auto px-4 py-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column */}

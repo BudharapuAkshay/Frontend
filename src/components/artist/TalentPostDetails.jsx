@@ -19,17 +19,27 @@ function TalentPostDetails() {
   const artistId = sessionStorage.getItem("id"); // Replace with dynamic artistId from authentication or context.
 
   useEffect(() => {
-    // Fetch post details by postId
-    const fetchPostDetails = async () => {
+    const fetchPostDetailsAndStatus = async () => {
       try {
-        const response = await fetch(
+        // Fetch post details
+        const postResponse = await fetch(
           `http://localhost:5959/api/talent-posts/${postId}`
         );
-        if (!response.ok) {
+        if (!postResponse.ok) {
           throw new Error("Failed to fetch post details");
         }
-        const data = await response.json();
-        setPostDetails(data);
+        const postData = await postResponse.json();
+        setPostDetails(postData);
+
+        // Check application status
+        const statusResponse = await fetch(
+          `http://localhost:8989/api/applications/${artistId}/${postId}/status`
+        );
+        if (!statusResponse.ok) {
+          throw new Error("Failed to fetch application status");
+        }
+        const hasApplied = await statusResponse.json();
+        setApplicationSubmitted(hasApplied);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -37,11 +47,10 @@ function TalentPostDetails() {
       }
     };
 
-    fetchPostDetails();
-  }, [postId]);
+    fetchPostDetailsAndStatus();
+  }, [postId, artistId]);
 
   const handleApplicationSubmit = async () => {
-
     try {
       const response = await fetch(
         `http://localhost:5050/api/artists/posts/${artistId}/${postId}/apply`,
@@ -50,7 +59,7 @@ function TalentPostDetails() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({fileUrl}),
+          body: JSON.stringify({ fileUrl }),
         }
       );
 
@@ -65,9 +74,11 @@ function TalentPostDetails() {
   };
 
   if (loading) {
-    return (<div className="min-h-screen bg-gray-900 flex items-center justify-center">
-      <ShimmerPlaceholder />
-    </div>);
+    return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <ShimmerPlaceholder />
+      </div>
+    );
   }
 
   if (error) {
@@ -119,7 +130,7 @@ function TalentPostDetails() {
               {talentPostRoleType.toUpperCase()} {talentPostTalentType.toUpperCase()}
             </h1>
             <p className="text-xl text-gray-300">{talentPostProjectDetails}</p>
-            <p className="text-xl text-gray-300"><span>Gender Required: </span>{talentPostGender.toUpperCase()}</p>
+            <p className="text-xl text-gray-300 mt-2"><span>Gender Required: </span>{talentPostGender.toUpperCase()}</p>
           </div>
 
           {/* Key Details */}
@@ -136,15 +147,7 @@ function TalentPostDetails() {
                     <p className="text-white">{talentPostLocation}</p>
                   </div>
                 </div>
-                <div className="flex items-center text-gray-300">
-                  <FiCalendar className="w-5 h-5 mr-3 text-blue-400" />
-                  <div>
-                    <p className="text-sm text-gray-400">Start Date</p>
-                    <p className="text-white">
-                      {new Date(talentPostStartDate).toLocaleDateString()}
-                    </p>
-                  </div>
-                </div>
+                
                 <div className="flex items-center text-gray-300">
                   <FiClock className="w-5 h-5 mr-3 text-blue-400" />
                   <div>
@@ -170,7 +173,7 @@ function TalentPostDetails() {
                 <div className="flex items-center text-gray-300">
                   <FiBriefcase className="w-5 h-5 mr-3 text-blue-400" />
                   <div>
-                    <p className="text-sm text-gray-400">Submission Deadline</p>
+                    <p className="text-sm text-gray-400">Application Deadline</p>
                     <p className="text-white">
                       {new Date(
                         talentPostSubmissionDeadline
@@ -181,7 +184,16 @@ function TalentPostDetails() {
                 <div className="flex items-center text-gray-300">
                   <FiCalendar className="w-5 h-5 mr-3 text-blue-400" />
                   <div>
-                    <p className="text-sm text-gray-400">End Date</p>
+                    <p className="text-sm text-gray-400">Project Start Date</p>
+                    <p className="text-white">
+                      {new Date(talentPostStartDate).toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center text-gray-300">
+                  <FiCalendar className="w-5 h-5 mr-3 text-blue-400" />
+                  <div>
+                    <p className="text-sm text-gray-400">Project End Date</p>
                     <p className="text-white">
                       {new Date(talentPostEndDate).toLocaleDateString()}
                     </p>
@@ -210,6 +222,8 @@ function TalentPostDetails() {
                 className="block text-sm font-medium text-gray-300"
               >
                 File URL for Pre-Screening
+                <div>( Upload all files in a single folder, upload in Google Drive, make it public and share the link )
+                </div>
               </label>
               <input
                 type="text"
@@ -231,10 +245,10 @@ function TalentPostDetails() {
               className={`px-8 py-3 font-semibold rounded-lg transition-colors ${
                 applicationSubmitted
                   ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700 text-white"
+                  : "bg-blue-500 text-white hover:bg-blue-600"
               }`}
             >
-              {applicationSubmitted ? "Already Applied" : "Submit Application"}
+              {applicationSubmitted ? "Application Submitted" : "Submit Application"}
             </button>
           </div>
         </div>

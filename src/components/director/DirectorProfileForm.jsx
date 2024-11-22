@@ -51,7 +51,6 @@ const RegistrationForm = () => {
       }
     } catch (error) {
       console.error("Error creating director profile:", error);
-      alert("An error occurred while creating the profile.");
     }
   };
 
@@ -135,7 +134,7 @@ const RegistrationForm = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-base font-semibold text-gray-300">Profile Picture URL</label>
+                  <label className="block text-base font-semibold text-gray-300">Profile Picture URL </label>
                   <input
                     type="text"
                     name="directorProfilePictureUrl"

@@ -61,7 +61,7 @@ function ApplicationsList({ postId }) {
       <ShimmerPlaceholder />
     </div>);
   }
-  console.log(applicants)
+  
   return (
     <div className="bg-gray-700/50 rounded-lg p-4 hover:bg-gray-700/70 transition-colors">
       <h2 className="text-xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">

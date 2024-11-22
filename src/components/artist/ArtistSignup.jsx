@@ -25,7 +25,6 @@ export default function ArtistSignup() {
             const data = await response.json();
             if (response.ok) {
                 navigate('/artist/create-profile', { state: { artistId: data.id } });
-                console.log("Artist registered successfully");
             } else {
                 console.log("Failed to register artist");
             }

@@ -21,7 +21,6 @@ function DirectorProfile() {
         }
         const data = await response.json();
         setDirector(data);
-        console.log(data);
       } catch (err) {
         setError(err.message);
       } finally {
